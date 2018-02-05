@@ -1,8 +1,8 @@
 <template>
     <div class="song-list">
       <ul>
-         <li v-for="(item,k) in songs">
-           <a :href="item.url">
+         <li v-for="(item , k) in songs">
+           <a :href="'//y.qq.com/w/taoge.html?ADTAG=myqq&from=myqq&channel=10007100&id='+item.id">
            <img v-lazy="item.picUrl" alt="">
            <span>{{item.songListDesc}}</span>
            </a>
@@ -38,7 +38,7 @@
       vertical-align: top;
       width: 170px;
       height: 170px;
-      margin: 25px 5px;
+      margin: 0 5px 50px;
       a{
         span{
           color: honeydew;

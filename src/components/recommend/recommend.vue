@@ -4,22 +4,29 @@
       <div class="recommened-tit">
         歌曲推荐
       </div>
-      <songs-list :songs="songsList"></songs-list>
-    </div>
+      <div class="content">
+          <songs-list :songs="songsList"></songs-list>
+          <div class="loading-content" v-show="!songsList.length">
+            <loading></loading>
+          </div>
+       </div>
+     </div>
 </template>
 
 <script>
-import Slider from '../../base/slider/slider.vue'
-import songsList from "../../base/songs/songs.vue"
-import {getRecommend,getDisList} from '../../api/recommend.js'
-import {ERR_OK} from '../../api/config.js'
+import Slider from 'base/slider/slider.vue'
+import SongsList from "base/songs/songs.vue"
+import {getRecommend,getDisList} from 'api/recommend.js'
+import {ERR_OK} from 'api/config.js'
+import Loading from 'base/loading/loading.vue'
 export default {
 created() {
   this._getRecommend()
 },
 components: {
   Slider,
-  songsList,
+  SongsList,
+  Loading
 },
 data (){
   return {
@@ -33,12 +40,7 @@ methods: {
       if(res.code === ERR_OK){
         this.sliderMsg=res.data.slider
         this.songsList=res.data.songList
-        this.songsList[0].url='//y.qq.com/w/taoge.html?ADTAG=myqq&from=myqq&channel=10007100&id=2646688496'
-        this.songsList[1].url='//y.qq.com/w/taoge.html?ADTAG=myqq&from=myqq&channel=10007100&id=1144416825'
-        this.songsList[2].url='//y.qq.com/w/taoge.html?ADTAG=myqq&from=myqq&channel=10007100&id=2043041547'
-        this.songsList[3].url='//y.qq.com/w/taoge.html?ADTAG=myqq&from=myqq&channel=10007100&id=2040362185'
-        this.songsList[0].url='//y.qq.com/w/taoge.html?ADTAG=myqq&from=myqq&channel=10007100&id=1723063372'
-        this.songsList[0].url='//y.qq.com/w/taoge.html?ADTAG=myqq&from=myqq&channel=10007100&id=3482605622'
+
       }
     })
   },
@@ -47,6 +49,15 @@ methods: {
 </script>
 
 <style scoped lang="less">
+  .content{
+    position: relative;
+    .loading-content{
+      position:absolute;
+      top:50%;
+      width: 100%;
+      transform: translateY(-50%);
+    }
+  }
   .recommened-tit{
     text-align: center;
     color: #CDA32E;
@@ -54,4 +65,5 @@ methods: {
     line-height: 30px;
     margin: 10px auto 5px;
   }
+
 </style>
