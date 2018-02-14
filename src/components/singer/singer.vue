@@ -28,8 +28,8 @@ export default {
       getSingerList().then(res=>{
         if(res.code===ERR_OK){
           this.singers=this._normallazeSinger(res.data.list);
-          console.log(res.data.list)
-          console.log(this.singers,22222)
+         /* console.log(res.data.list)
+          console.log(this.singers,22222)*/
         }
       })
     },
@@ -60,7 +60,6 @@ export default {
       for(let key in map){
 
          let val=map[key]
-        console.log(val.title,99999)
         if(val.title===HOT_NAME){
            hot.push(val)
         } else if(val.title.match(/[a-zA-Z]/)){
